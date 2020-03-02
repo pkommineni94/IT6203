@@ -1,0 +1,41 @@
+<div class="">
+<h1>Find Vacation Packages</h1>
+</div>
+<form>
+    <div class= "form-group">
+      <label>
+        From:
+        <input type="text" name="From" [(ngModel)]="source">
+      </label>
+    
+      <label>
+        To:
+        <input type="text" name="To" [(ngModel)]="destination">
+      </label>
+    
+    </div>
+        
+    <div class= "form-group">
+      <label>
+      Departure:
+      <input type="Date"  name="Departure">
+      </label>
+    
+      <label>
+      Return:
+      <input type="Date"  name="Return">
+      </label>
+    </div>
+    
+    <div class= "form-group">
+      <label>
+      Guests:
+      <input type="number" name="Guests" placeholder={{GuestsPlaceHolder}}>
+      </label>
+    </div>
+    
+    <div>
+      <input type="button" [disabled]="buttonDisabled" (click)="findPackagesBtnClicked()" value="Find Packages">
+    </div> 
+    </form>
+    
