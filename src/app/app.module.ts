@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { VacationPackageService } from './vacationPackage.service';
 import { VacationPackageComponent } from './vacation-package/vacation-package.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,9 @@ import { VacationPackageComponent } from './vacation-package/vacation-package.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, FormsModule
+    AppRoutingModule, FormsModule, HttpClientModule
   ],
-  providers: [],
+  providers: [VacationPackageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
