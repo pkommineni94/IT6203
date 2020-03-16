@@ -18,6 +18,7 @@ export class VacationPackageViewComponent implements OnInit {
   public vacationPackages: any = [];
   constructor(private _myService:VacationPackageService){}
   ngOnInit(){
+    
     this.getVacationPackages();
   }
 

@@ -1,16 +1,17 @@
 <div class="">
 <h1>Find Vacation Packages</h1>
 </div>
-<form>
+<form (ngSubmit)="onSubmit()" #vacationPackageSearchForm="ngForm">  
+
     <div class= "form-group">
       <label>
         From:
-        <input type="text" name="From" [(ngModel)]="source">
+        <input type="text" name="from" [(ngModel)]="from">
       </label>
     
       <label>
         To:
-        <input type="text" name="To" [(ngModel)]="destination">
+        <input type="text" name="to" [(ngModel)]="to">
       </label>
     
     </div>
@@ -35,7 +36,7 @@
     </div>
     
     <div>
-      <input type="button" [disabled]="buttonDisabled" (click)="findPackagesBtnClicked()" value="Find Packages">
+      <button mat-flat-button color="warn">Find Packages</button>
     </div> 
     </form>
     

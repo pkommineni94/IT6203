@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VacationPackageService } from './vacationPackage.service';
@@ -20,7 +20,7 @@ import { AngularMaterialModule } from './material.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, FormsModule, HttpClientModule,
+    AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule,
    BrowserAnimationsModule, AngularMaterialModule
   ],
   providers: [VacationPackageService],
