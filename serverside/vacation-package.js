@@ -29,7 +29,7 @@ app.get('/vacation-package', (req, res, next) => {
         res.json(vacationPackages);
 })
 
-//serve incoming post requests to /students
+//serve incoming post requests to /vacation packages
 app.post('/vacation-package', (req, res, next) => {  
     const vacationPackage = req.body;  
     console.log(vacationPackage.from + " " + vacationPackage.to);
