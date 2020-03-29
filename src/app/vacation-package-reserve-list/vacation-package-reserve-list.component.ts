@@ -38,9 +38,15 @@ export class VacationPackageReserveListComponent implements OnInit {
     );                                             
   }
 
-  onDelete(reservationId: string) {
-    console.log("deleting reservation: " +reservationId);
-    this._myService.deleteReservation(reservationId);  
+  onDelete(index: number, e) {
+    
+    if(window.confirm('Are you sure')) {
+      const data = this.dataSource.data;
+      data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
+      this.dataSource.data = data;
+      console.log("deleting reservation: " +e._id);
+      this._myService.deleteReservation(e._id);
+    }  
   }
 
 }

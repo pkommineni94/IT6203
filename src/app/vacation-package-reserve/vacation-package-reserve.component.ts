@@ -11,9 +11,6 @@ import { VacationPackageService } from '../vacationPackage.service';
   styleUrls: ['./vacation-package-reserve.component.css']
 })
 export class VacationPackageReserveComponent implements OnInit {
-
-  
-
   visible = true;
   selectable = true;
   removable = true;
@@ -22,6 +19,7 @@ export class VacationPackageReserveComponent implements OnInit {
   @ViewChild('resetvacationPkgForm', { static: true }) myNgForm;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   vacationPkgForm: FormGroup;
+  PackageCodeArray: any = ['ATLMIA5', 'ATLCHA2', 'MIAKYW3'];
   
 
   ngOnInit() {
@@ -38,6 +36,7 @@ export class VacationPackageReserveComponent implements OnInit {
   /* Reactive reserve vaction pkg form */
   submitVacationPkgForm() {
     this.vacationPkgForm = this.fb.group({
+      package_code: ['', [Validators.required]],
       primary_contact_firstName: ['', [Validators.required]],
       primary_contact_lastName: ['', [Validators.required]],
       phone: ['', [Validators.required]],
@@ -69,7 +68,7 @@ export class VacationPackageReserveComponent implements OnInit {
       this.myService.AddVacationPackageReservation(this.vacationPkgForm.value).subscribe(res => {
         let id = res['_id'];
         alert("Vacation Package Reservation was successful. Confirmation# " + id);
-        this.router.navigate(['/vacation-packages-list']);
+        this.router.navigate(['/vacation-package-reservations']);
       }, (err) => {
         console.log(err);
       }

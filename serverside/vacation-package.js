@@ -76,10 +76,10 @@ app.post('/vacation-package-search', (req, res, next) => {
 });
 
 // Add reservation
-app.post('/vacation-reservation-reservation', (req, res, next) => {
+app.post('/vacation-package-reservation', (req, res, next) => {
   console.log("adding trip reservation to db");
   req.body['total_price'] = req.body.number_of_guests * 100;
-  req.body['package_code'] = "ATLMIA5";
+  //req.body['package_code'] = "ATLMIA5";
   tripReservation.create(req.body, (error, data) => {
     if (error) {
       return next(error)

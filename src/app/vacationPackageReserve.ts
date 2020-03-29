@@ -2,7 +2,7 @@ export class VacationPackageReserve {
     _id: String;
     primary_contact_firstName: String;
     primary_contact_lastName: String;
-    pkg_code: String;
+    package_code: String;
     phone: String;
     email: String;
     dob: Date;

@@ -10,6 +10,18 @@
       <!-- Left block -->
       <mat-card>
         <div class="controlers-wrapper">
+          <!-- Section -->
+          <mat-form-field>
+            <mat-label>Package Code</mat-label>
+            <mat-select  formControlName="package_code">
+              <mat-option [value]="packageCodeArray" *ngFor="let packageCodeArray of PackageCodeArray">{{packageCodeArray}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="handleError('package_code', 'required')">
+              Package Code is required
+            </mat-error>
+          </mat-form-field>
+
           <!-- First Name -->
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Primary Contact First name" formControlName="primary_contact_firstName">
