@@ -11,12 +11,16 @@ import { VacationPackageViewComponent } from './vacation-package-view/vacation-p
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './material.module';
+import { VacationPackageReserveComponent } from './vacation-package-reserve/vacation-package-reserve.component';
+import { VacationPackageReserveListComponent } from './vacation-package-reserve-list/vacation-package-reserve-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VacationPackageComponent,
-    VacationPackageViewComponent
+    VacationPackageViewComponent,
+    VacationPackageReserveComponent,
+    VacationPackageReserveListComponent
   ],
   imports: [
     BrowserModule,

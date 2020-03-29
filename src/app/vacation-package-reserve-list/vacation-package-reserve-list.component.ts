@@ -2,18 +2,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { VacationPackageService } from '../vacationPackage.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { VacationPackage } from '../vacationPackage';
+import { VacationPackageReserve} from '../vacationPackageReserve';
 
 
 @Component({
-  selector: 'app-vacation-package-view',
-  templateUrl: './vacation-package-view.component.html',
-  styleUrls: ['./vacation-package-view.component.css']
+  selector: 'app-vacation-package-reserve-list',
+  templateUrl: './vacation-package-reserve-list.component.html',
+  styleUrls: ['./vacation-package-reserve-list.component.css']
 })
-export class VacationPackageViewComponent implements OnInit {
-  dataSource: MatTableDataSource<VacationPackage>;
+export class VacationPackageReserveListComponent implements OnInit {
+  dataSource: MatTableDataSource<VacationPackageReserve>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  displayedColumns: string[] = ['from', 'to', 'pkg_code', 'pkg_duration_days', 'price_per_person'];
+  displayedColumns: string[] = ['primary_contact_firstName', 'primary_contact_lastName', 'package_code', 'total_price','id', 'action'];
   
   public vacationPackages: any = [];
   constructor(private _myService:VacationPackageService){}
@@ -24,10 +24,10 @@ export class VacationPackageViewComponent implements OnInit {
 
   getVacationPackages()
   {
-    this._myService.getVacationPackages().subscribe(
+    this._myService.getReservedVacationPackages().subscribe(
       //read data and assign to public variable students
       data => {this.vacationPackages = data;
-        this.dataSource = new MatTableDataSource<VacationPackage>(this.vacationPackages);
+        this.dataSource = new MatTableDataSource<VacationPackageReserve>(this.vacationPackages);
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
         }, 0);
@@ -36,6 +36,11 @@ export class VacationPackageViewComponent implements OnInit {
       () => console.log('finished loading'),
       
     );                                             
+  }
+
+  onDelete(reservationId: string) {
+    console.log("deleting reservation: " +reservationId);
+    this._myService.deleteReservation(reservationId);  
   }
 
 }
