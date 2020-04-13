@@ -7,6 +7,7 @@ dataBaseConfig = require('./database/db');
 const vacationPackage = require('./models/vacationPackage');
 const tripReservation = require('./models/tripReservation');
 
+
 // Connecting mongoDB
 mongoose.Promise = global.Promise;
 mongoose.connect(dataBaseConfig.db, {
@@ -18,7 +19,6 @@ mongoose.connect(dataBaseConfig.db, {
     console.log('Could not connected to database : ' + error)
   }
 )
-
 
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -53,6 +53,36 @@ app.get('/vacation-package-reservations', (req, res, next) => {
     }
   })
 });
+
+// Get single student
+app.get('/vacation-package-reservations/:id', (req, res, next) => {
+  tripReservation.findById(req.params.id, (error, data) => {
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
+})
+
+
+// Update student
+app.put('/update-vacation-package-reservation/:id', (req, res, next) => {
+  console.log(req.params)
+  req.body['total_price'] = req.body.number_of_guests * 100;
+  tripReservation.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, (error, data) => {
+    if (error) {
+      return next(error);
+      console.log(error)
+    } else {
+      res.json(data)
+      console.log('Vacation Package Reservation successfully updated!')
+    }
+  })
+})
+
 
 app.get('/vacation-package/:id', (req, res, next) => {
   vacationPackage.findById(req.params.id, (error, data) => {

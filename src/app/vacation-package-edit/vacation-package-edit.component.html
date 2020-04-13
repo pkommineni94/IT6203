@@ -1,0 +1,115 @@
+<!-- Title group  -->
+<div class="title-group">
+    <h1 class="mat-h1">Edit Vacation Package Reservation</h1>
+    <mat-divider fxFlex="1 0"></mat-divider>
+  </div>
+  
+  <!-- Form -->
+  <div class="inner-wrapper">
+    <form [formGroup]="vacationPkgForm" (ngSubmit)="updatevacationPkgForm()" #resetvacationPkgForm="ngForm" novalidate>
+      <!-- Left block -->
+      <mat-card>
+        <div class="controlers-wrapper">
+          <!-- Section -->
+          <mat-form-field>
+            <mat-label>Package Code</mat-label>
+            <mat-select  formControlName="package_code">
+              <mat-option [value]="packageCodeArray" *ngFor="let packageCodeArray of PackageCodeArray">{{packageCodeArray}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="handleError('package_code', 'required')">
+              Package Code is required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- First Name -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Primary Contact First name" formControlName="primary_contact_firstName">
+            <mat-error *ngIf="handleError('primary_contact_firstName', 'required')">
+              You must provide a <strong>first name</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Last Name -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Primary Contact Last Name" formControlName="primary_contact_lastName">
+            <mat-error *ngIf="handleError('primary_contact_lastName', 'required')">
+              You must provide a <strong>last name</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Email -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Primary Contact Email" formControlName="email">
+            <mat-error *ngIf="handleError('email', 'required')">
+              You must provide <strong> email</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Phone -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Primary Contact Phone" formControlName="phone">
+            <mat-error *ngIf="handleError('phone', 'required')">
+              You must provide <strong> phone number</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Num of guests -->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Total Number of guests" formControlName="number_of_guests">
+            <mat-error *ngIf="handleError('number_of_guests', 'required')">
+              You must provide <strong> number of guests</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <!--Additional Info -->
+          <mat-form-field class="example-full-width">
+            <!-- <mat-label>Additional Guest Information</mat-label> -->
+            <textarea matInput placeholder="Additional Guests Name and age" formControlName="additional_information"></textarea>
+        </mat-form-field>
+  </div>
+          
+      </mat-card>
+  
+      <!-- Right block -->
+      <mat-card>
+        <div class="controlers-wrapper">
+        
+  
+          <!-- Date of birth -->
+          <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker" placeholder="Primary Contact Date of birth" formControlName="dob"
+              (dateChange)="formatDate($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="handleError('dob', 'required')">
+              Date of birth is required
+            </mat-error>
+          </mat-form-field>
+  
+          <!-- Gender -->
+          <div class="misc-bottom-padding">
+            <mat-label>Gender:</mat-label>
+            <mat-radio-group aria-label="Select an option" formControlName="gender">
+              <mat-radio-button value="Male">Male</mat-radio-button>
+              <mat-radio-button value="Female">Female</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          
+        </div>
+
+       
+      </mat-card>
+  
+      <!-- Submit & Reset -->
+      <mat-card>
+        <div class="full-wrapper button-wrapper">
+          <div class="button-wrapper">
+            <button mat-flat-button color="warn">Update</button>
+          </div>
+        </div>
+      </mat-card>
+
+    </form>
+  </div>

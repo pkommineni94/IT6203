@@ -11,6 +11,7 @@ const httpOptions = {
     @Injectable()
     
     export class VacationPackageService {
+        headers = new HttpHeaders().set('Content-Type', 'application/json');
       
  
         public vacationPackages: any = [];
@@ -20,6 +21,27 @@ const httpOptions = {
         getReservedVacationPackages() {        
             this.vacationPackages = this.http.get('http://localhost:8000/vacation-package-reservations');
             return this.vacationPackages
+        }
+
+        // Get student
+        getReservedVacationPackage(reservationId: string): Observable<any> {
+            let API_URL = "http://localhost:8000/vacation-package-reservations/"+ reservationId;
+            return this.http.get(API_URL, { headers: this.headers })
+            .pipe(
+                map((res: Response) => {
+                return res || {}
+                }),
+                catchError(this.errorMgmt)
+            )
+        }
+
+        // Update student
+        UpdateVacationPackageReservation(reservationId: string, data: VacationPackageReserve): Observable<any> {
+            let API_URL = "http://localhost:8000/update-vacation-package-reservation/" + reservationId;
+            return this.http.put(API_URL, data, { headers: this.headers })
+            .pipe(
+                catchError(this.errorMgmt)
+            )
         }
 
         deleteReservation(reservationId: string) {  
