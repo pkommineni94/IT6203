@@ -1,15 +1,30 @@
 <!-- Toolbar -->
 <mat-toolbar color="primary" class="header">
   <div>Travel Guide App</div>
+
+  <div (click)="navigateComponent('vacationpackages')">
+   Vacation Packages
+  </div>
+  <div (click)="navigateComponent('hotels')">
+    Hotels
+   </div>
+   <div (click)="navigateComponent('flights')">
+    Flights
+   </div>
+   <div (click)="navigateComponent('car')">
+    Cars
+  </div>
   <span class="nav-tool-items">
     <mat-icon (click)="sidenav.toggle()" class="hamburger">menu</mat-icon>
   </span>
+  
 </mat-toolbar>
 
-<mat-sidenav-container>
+<mat-sidenav-container >
   <!-- Sidenav -->
-  <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
+  <mat-sidenav  #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
     [fixedTopGap]>
+    <ng-container *ngIf="currentModule == 'vacationpackages'" >
     <mat-nav-list>
       <a mat-list-item routerLinkActive="active" routerLink="/vacation-packages-find">
         <mat-icon></mat-icon> Search Vacation Packages
@@ -24,10 +39,47 @@
         <mat-icon></mat-icon> View Reservations
       </a>
     </mat-nav-list>
+  </ng-container>
+  <ng-container *ngIf="currentModule == 'car'" >
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="active" routerLink="/addcar">
+        <mat-icon></mat-icon> Add Car
+      </a>
+      <a mat-list-item routerLinkActive="active" routerLink="/carslist">
+        <mat-icon> </mat-icon>Cars list
+      </a>
+    </mat-nav-list>
+  </ng-container>
+  <ng-container *ngIf="currentModule == 'hotels'" >
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="active" routerLink="/listHotels">
+        <mat-icon></mat-icon>  List Hotels
+      </a>
+      <a mat-list-item routerLinkActive="active" routerLink="/addHotel">
+        <mat-icon></mat-icon> Add Hotel
+      </a>
+    </mat-nav-list>
+  </ng-container>
+
+  <ng-container *ngIf="currentModule == 'flights'" >
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="active" routerLink="/addFlights">
+        <mat-icon></mat-icon> Add Flights
+      </a>
+      <a mat-list-item routerLinkActive="active" routerLink="/bookedFlights">
+        <mat-icon></mat-icon> Flights List
+      </a>
+    </mat-nav-list>
+  </ng-container>
+
+
+  
   </mat-sidenav>
 
   <!-- Main content -->
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+     
+      <router-outlet></router-outlet>
+    
   </mat-sidenav-content>
 </mat-sidenav-container>

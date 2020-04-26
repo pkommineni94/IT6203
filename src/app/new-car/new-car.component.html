@@ -1,0 +1,35 @@
+<div>
+    <h3> {{ title }}</h3>
+  
+    <form (ngSubmit)="onSubmit(myForm.value)" #myForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Car Model- Ex: Honda</mat-label>
+            <input matInput id="carmodel" [(ngModel)]="carmodel" name="carmodel">
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Car Type - ex: SUV</mat-label>
+            <input matInput id="cartype" [(ngModel)]="cartype" name="cartype">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Car Avialbility Start date</mat-label>
+            <input [(ngModel)]="availabilityStart" name="availabilityStart" matInput [matDatepicker]="startdatepicker">
+            <mat-datepicker-toggle matSuffix [for]="startdatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #startdatepicker></mat-datepicker>
+        </mat-form-field>
+
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Car Avialbility End date</mat-label>
+            <input [(ngModel)]="availabilityEnd" name="availabilityEnd" matInput [matDatepicker]="enddatepicker">
+            <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #enddatepicker></mat-datepicker>
+        </mat-form-field>
+
+        <p>
+            <button type="submit" mat-raised-button color="primary">Submit</button>
+        </p>
+    </form>
+</div>  

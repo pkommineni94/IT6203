@@ -1,0 +1,82 @@
+<div>
+ 
+<h3> Add Flights </h3>
+<table>
+  <tr>
+    <td style=width:50%>
+      <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="From" id="From" [(ngModel)]="From" name="From" required>
+        </mat-form-field> <br />
+    
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="To Where" id="Towhere" [(ngModel)]="Towhere" name="Towhere" required>
+        </mat-form-field> <br />
+    
+        <mat-form-field appearance="fill">
+          <mat-label>Trip</mat-label>
+          <mat-select [(ngModel)]="Trip" name="Trip" required>
+            <mat-option value="Round Trip">Round Trip </mat-option>
+            <mat-option value="One way">One way</mat-option>
+          </mat-select>
+        </mat-form-field> <br />
+    
+    
+        <!--<mat-label>Depart</mat-label><br />
+        <input [(ngModel)]="Depart" name="Depart" type="Date"><br />-->
+    
+        <!-- <mat-form-field appearance="fill">
+          <label>Depart</label>
+          <input matInput placeholder="Depart" [ngModelOptions]="{ standalone: true }"
+            class="form-control" name="Depart" type="datetime-local" [(ngModel)]="Depart" required />
+        </mat-form-field><br> -->
+    
+        <mat-form-field appearance="fill">
+          <mat-label>Depart</mat-label>
+          <input [(ngModel)]="Depart" name="Depart" matInput [matDatepicker]="departdatepicker">
+          <mat-datepicker-toggle matSuffix [for]="departdatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #departdatepicker></mat-datepicker>
+      </mat-form-field>
+      <br/>
+    
+    
+        <!--<mat-form-field appearance="fill">
+          <label>Return</label>
+          <input matInput placeholder="Travelreturn" [ngModelOptions]="{ standalone: true }"
+          class="form-control" name="Travelreturn" type="date" [(ngModel)]="Depart" />
+        </mat-form-field><br>-->
+        <!-- <mat-form-field appearance="fill">
+          <label>Travelreturn</label>
+          <input matInput placeholder="Travelreturn" [ngModelOptions]="{ standalone: true }"
+            class="form-control" name="Travelreturn" type="datetime-local" [(ngModel)]="Travelreturn" required />
+        </mat-form-field><br> -->
+    
+        <mat-form-field appearance="fill">
+          <mat-label>Travelreturn</mat-label>
+          <input [(ngModel)]="Travelreturn" name="Travelreturn" matInput [matDatepicker]="travelreturndatepicker">
+          <mat-datepicker-toggle matSuffix [for]="travelreturndatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #travelreturndatepicker></mat-datepicker>
+      </mat-form-field>
+      <br/>
+    
+        <mat-form-field appearance="fill">
+          <mat-label>People</mat-label>
+          <input matInput placeholder="people" id="people" [(ngModel)]="people" name="people" type="number" required>
+        </mat-form-field>
+        
+        
+        <p>
+          <button type="submit" mat-raised-button >Submit</button>
+        </p>
+        
+    
+      </form>
+    </td>
+    <td style=width:50%>
+    <app-googlemapsapi></app-googlemapsapi>
+    </td>
+  </tr>
+</table>
+ 
+
+</div>

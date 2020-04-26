@@ -1,5 +1,6 @@
 import { Component, ViewChild, HostListener, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,13 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 export class AppComponent {
   opened = true;
+  currentModule = '';
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
+
+  constructor(route:  ActivatedRoute, private router: Router){
+   console.log( 'App -- route.component -- ' +  route);
+
+  }
 
   ngOnInit() {
     console.log(window.innerWidth)
@@ -40,5 +47,20 @@ export class AppComponent {
     } else {
       return false;
     }
+  }
+
+  navigateComponent(modulename){ 
+    this.currentModule = modulename;
+    console.log(modulename);
+    if(modulename == "vacationpackages")
+      this.router.navigate(['/vacation-package-reservations']);
+    else if(modulename == "car")
+      this.router.navigate(['/carslist']);
+    else if(modulename == "hotels")
+      this.router.navigate(['/listHotels']);
+    else  if(modulename == "flights")
+      this.router.navigate(['/bookedFlights']);
+
+    // console.log(modulename);
   }
 }

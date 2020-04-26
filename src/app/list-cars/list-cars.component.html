@@ -1,0 +1,55 @@
+<div>
+    <div style="width: 1050px;">
+        <table>
+            <thead style="font-weight: bold; font-size: 25px;">
+                <tr>
+                    <td> 
+                        Car Model
+                    </td>
+                    <td>
+                        Car Type
+                    </td>
+                    <td>
+                        From Date
+                    </td>
+                    <td>
+                        To Date
+                    </td>
+                    <td>
+                        Update
+                    </td>
+                    <td>
+                        Delete
+                    </td>
+                </tr>
+            </thead>
+            <tbody style="font-size: 17px;" *ngFor="let cardata of carsdata let i = index">
+                <tr>
+                    <td>
+                        {{cardata.carModel}}
+                    </td>
+                    <td>
+                        {{cardata.carType}}
+                    </td>
+                    <td>
+                        {{cardata.availabilityStart}}
+                    </td>
+                    <td>
+                        {{cardata.availabilityEnd}}
+                    </td>
+                    <td>
+                        <button mat-flat-button color="accent">
+                            <a [routerLink]="['/addcar/', cardata._id]">Update</a>
+                        </button>
+                    </td>
+                    <td>
+                        <button (click)="onDelete(cardata._id)" mat-flat-button color="warn">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+    </div>
+</div>

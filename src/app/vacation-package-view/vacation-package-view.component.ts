@@ -4,6 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { VacationPackage } from '../vacationPackage';
 
+import { ActivatedRoute } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-vacation-package-view',
@@ -16,7 +19,9 @@ export class VacationPackageViewComponent implements OnInit {
   displayedColumns: string[] = ['from', 'to', 'pkg_code', 'pkg_duration_days', 'price_per_person'];
   
   public vacationPackages: any = [];
-  constructor(private _myService:VacationPackageService){}
+  constructor(route:  ActivatedRoute, private _myService:VacationPackageService){
+    console.log( 'route.component' +  route);
+  }
   ngOnInit(){
     
     this.getVacationPackages();

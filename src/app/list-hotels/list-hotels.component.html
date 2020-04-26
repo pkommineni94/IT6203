@@ -1,0 +1,71 @@
+<!-- <p>list-hotels works!</p>
+
+<div>
+  <ul *ngFor ="let hotel of hotelsdata let i = index">
+    <li>{{hotel._id}} {{hotel.Destination}} {{hotel.Checkin}}
+       {{hotel.Checkout}} {{hotel.Class}} {{hotel.Rooms}}{{hotel.Guests}}(index {{i}})
+      <button mat-button color="warn" (click)="onDelete(hotel._id)">DELETE</button>
+      <button mat-button color="green" [routerLink]="['/edithotel', hotel._id]">UPDATE</button>
+    </li>
+  </ul>
+</div> -->
+
+<div>
+  <div>
+      <table>
+          <thead style="font-weight: bold; font-size: 25px;">
+              <tr>
+                  <td> 
+                    Destination
+                  </td>
+                  <td>
+                   Check in
+                  </td>
+                  <td>
+                   Check Out
+                  </td>
+                  <td>
+                    Class
+                  </td>
+                  
+                  <td>
+                     Guests
+                  </td>
+                  <td>Update</td>
+                  <td>Delete</td>
+              </tr>
+          </thead>
+          <tbody style="font-size: 17px;" *ngFor="let hotel of hotelsdata let i = index">
+              <tr>
+                  <td>
+                     {{hotel.Destination}}
+                  </td>
+                  <td>
+                    {{hotel.Checkin}}
+                  </td>
+                  <td>
+                    {{hotel.Checkout}}
+                  </td>
+                  <td>
+                    {{hotel.Class}}
+                  </td>
+                  
+                  <td>
+                    {{hotel.Guests}}
+                  </td>
+                  <td>
+                      <button mat-flat-button color="accent">
+                          <a [routerLink]="['/edithotel/', hotel._id]">Update</a>
+                      </button>
+                  </td>
+                  <td>
+                      <button (click)="onDelete(hotel._id)" mat-flat-button color="warn">Delete</button>
+                  </td>
+              </tr>
+          </tbody>
+
+      </table>
+
+
+  </div>
+</div>

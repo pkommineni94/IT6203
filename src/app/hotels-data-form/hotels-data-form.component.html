@@ -1,0 +1,63 @@
+
+<div>
+  <h3>{{mode}} Hotel Form</h3>
+  <table>
+    <tr>
+      <td style="width: 50%;">
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+          <mat-form-field appearance="fill">
+            <input matInput placeholder="Destination" id="Destination" [(ngModel)]="Destination" name="Destination">
+          </mat-form-field> <br />
+      
+        
+          <mat-form-field appearance="fill">
+            <mat-label>Checkin</mat-label>
+            <input [(ngModel)]="Checkin" name="Checkin" matInput [matDatepicker]="checkindatepicker">
+            <mat-datepicker-toggle matSuffix [for]="checkindatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #checkindatepicker></mat-datepicker>
+        </mat-form-field>
+        <br>
+         
+      
+          <mat-form-field appearance="fill">
+            <mat-label>Checkout</mat-label>
+            <input [(ngModel)]="Checkout" name="Checkout" matInput [matDatepicker]="checkoutdatepicker">
+            <mat-datepicker-toggle matSuffix [for]="checkoutdatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #checkoutdatepicker></mat-datepicker>
+        </mat-form-field>
+       <br>
+          
+        
+          <mat-form-field appearance="fill">
+            <mat-label>Class</mat-label>
+            <mat-select [(ngModel)]="class" name="class">
+              <mat-option value="5 Star">5 Star </mat-option>
+              <mat-option value="4 Star">4 Star</mat-option>
+              <mat-option value="3 Star ">3 Star</mat-option>
+            </mat-select>
+          </mat-form-field><br />
+      
+      
+          <mat-form-field appearance="fill">
+            <mat-label>Guests</mat-label>
+            <input matInput placeholder="Guests" id="Guests" [(ngModel)]="Guests" name="Guests" type="number" min="01"
+              max="20" required>
+          </mat-form-field>
+      
+          <p>
+            
+            <button type="submit" mat-raised-button>Submit</button>
+        
+          </p>
+      
+        </form>
+      </td>
+      <td style="width: 50%;">
+      <app-googlemapsapi></app-googlemapsapi>
+
+      </td>
+    </tr>
+  </table>
+
+
+</div>

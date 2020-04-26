@@ -6,19 +6,30 @@ dataBaseConfig = require('./database/db');
 
 const vacationPackage = require('./models/vacationPackage');
 const tripReservation = require('./models/tripReservation');
+const CarRental = require('./models/carrental');
+const Hotel = require('./models/hotel');
+const Flightdata = require('./models/flightdata');
+
+
 
 
 // Connecting mongoDB
-mongoose.Promise = global.Promise;
-mongoose.connect(dataBaseConfig.db, {
-  useNewUrlParser: true
-}).then(() => {
-  console.log('Database connected sucessfully ')
-},
-  error => {
-    console.log('Could not connected to database : ' + error)
-  }
-)
+// mongoose.Promise = global.Promise;
+// mongoose.connect(dataBaseConfig.db, {
+//   useNewUrlParser: true
+// }).then(() => {
+//   console.log('Database connected sucessfully ')
+// },
+//   error => {
+//     console.log('Could not connected to database : ' + error)
+//   }
+// )
+
+const uri = "mongodb+srv://traveluser:traveluser123@cluster0-gcwdh.mongodb.net/mygroupproject?retryWrites=true&w=majority"
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => { console.log("connected"); })
+    .catch(() => { console.log("error connecting"); });
+
 
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -132,6 +143,187 @@ app.use(function (err, req, res, next) {
   console.error(err.message);
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
+});
+
+// Serve incoming post requests to /carrentals
+app.post('/carrentals', (req, res, next) => {
+
+  console.log('POST NEW Success');
+  const carrental = new CarRental({
+      carModel: req.body.carModel,
+      carType: req.body.carType,
+      availabilityStart: req.body.availabilityStart,
+      availabilityEnd: req.body.availabilityEnd
+  });
+
+  carrental.save()
+      .then(() => { console.log('Success -- POST'); })
+      .catch(err => { console.log('Error:' + err); });
+
+});
+
+app.get('/carrentals', (req, res, next) => {
+  console.log('APP-CARS-GET');
+  
+  //call mongoose method find(MongoDB db.Students.find())
+  CarRental.find()
+      //if data is returned, send data as a response 
+      .then(data => {
+          console.log('Success -- GET');
+          res.status(200).json(data);
+      })
+      //if error, send internal server error
+      .catch(err => {
+          console.log('Error: ${err}');
+          res.status(500).json(err);
+      });
+
+});
+
+app.put('/carrentals/:id', (req, res, next) => {
+  console.log("id: " + req.params.id)
+  // check that the parameter id is valid 
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+      //find a document and set new first and last names
+      CarRental.findOneAndUpdate({ _id: req.params.id },
+          {
+              $set: {
+                  carModel: req.body.carModel,
+                  carType: req.body.carType,
+                  availabilityStart: req.body.availabilityStart,
+                  availabilityEnd: req.body.availabilityEnd
+              }
+          }, { new: true })
+          .then((car) => {
+              if (car) { //what was updated
+                  console.log('Success -- UPDATED');
+              } else {
+                  console.log("no data exist for this id");
+              }
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+  } else {
+      console.log("please provide correct id");
+  }
+});
+
+app.delete("/carrentals/:id", (req, res, next) => {
+  console.log('CARS-- DELETED');
+
+  CarRental.deleteOne({ _id: req.params.id }).then(result => {
+      console.log(result);
+      res.status(200).json("Deleted!");
+  });
+
+});
+
+// Hotels
+
+app.get('/hotelsdata', (req, res, next) => {
+  console.log('HOTELS--GET--SUCCESS');
+  //call mongoose method find (MongoDB db.hotel.find())
+  Hotel.find() 
+  //if data is returned, send data as a response 
+  .then(data => res.status(200).json(data))
+  //if error, send internal server error
+  .catch(err => {
+  console.log('Error: ${err}');
+  res.status(500).json(err);
+});
+});
+
+
+// serve incoming post requests to /paymentMethods
+app.post('/hotelsdata', (req, res, next) => {
+  console.log('HOTELS--POST--SUCCESS');
+  const hotel = new Hotel({
+    Destination: req.body.Destination,
+    Checkin: req.body.Checkin,
+    Checkout: req.body.Checkout,
+    Class: req.body.Class,
+    Guests: req.body.Guests
+
+  });
+  //send the document to the database 
+  hotel.save()
+    //in case of success
+    .then(() => { console.log('Success');})
+    //if error
+    .catch(err => {console.log('Error:' + err);});
+    res.status(201).json('Post successful');
+  });
+
+   // serve incoming put requests to /students
+   app.put('/hotelsdata/:id', (req, res, next) => {
+    console.log("HOTELS--UPDATE: " + req.params.id)
+    // check that the parameter id is valid 
+    if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+      //find a document and set new first and last names
+      Hotel.findOneAndUpdate({_id: req.params.id},
+        {$set:{Destination : req.body.Destination,
+          Checkin: req.body.Checkin,
+          Checkout: req.body.Checkout,
+          Class: req.body.Class,
+          Guests: req.body.Guests}},{new:true}) 
+       .then((hotel) => {
+          if (hotel) { //what was updated
+            console.log(hotel);
+          } else {
+            console.log("no data exist for this id");
+          }
+       })
+      .catch((err) => {
+        console.log(err);
+       });
+   } else {
+     console.log("please provide correct id");
+   }
+    
+  });  
+
+  app.delete("/hotelsdata/:id", (req, res, next) => {
+    console.log("HOTELS--DELETE");
+    Hotel.deleteOne({ _id: req.params.id }).then(result => {
+      console.log(result);
+      res.status(200).json("Deleted!");
+    });
+});
+
+// Serve incoming post requests to /carrentals
+app.post('/flightsdata', (req, res, next) => {
+  console.log('Flights -- Success -- POST');
+
+  console.log(req.body.From);
+  console.log(req.body.Towhere);
+  console.log(req.body.Trip);
+  console.log(req.body.Depart);
+  console.log(req.body.Travelreturn);
+  console.log(req.body.people);
+
+  const flightdata = new Flightdata({
+    From: req.body.From,
+    Towhere: req.body.Towhere,
+    Trip: req.body.Trip,
+    Depart: req.body.Depart,
+    Travelreturn: req.body.Travelreturn,
+    people: req.body.people
+  });
+
+  flightdata.save()
+      .then(() => { console.log('Success -- POST'); })
+      .catch(err => { console.log('Error:' + err); });
+});
+
+app.get('/flightsdata', (req, res, next) => {
+  Flightdata.find()
+    .then(data => res.status(200).json(data))
+    .catch(err => {
+      console.log(`An Error occured. ${err}`);
+      res.status(500).json(err);
+    });
+
 });
 
 //to use thids middleware in other parts of the application

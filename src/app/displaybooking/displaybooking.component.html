@@ -1,0 +1,37 @@
+
+<div class="container">
+    <table border=1 class="table">
+      <tr>
+        <th>FlightId</th>
+        <th>From</th>
+        <th>Towhere</th>
+        <th>Trip</th>
+        <th>Depart</th>
+        <th>Travelreturn</th>
+        <th>People</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let flightdata of flightsdata let i = index">
+        <td>{{flightdata._id}}</td>
+        <td>{{flightdata.From}}</td>
+        <td>{{flightdata.Towhere}}</td>
+        <td>{{flightdata.Trip}}</td>
+        <td>{{flightdata.Depart}}</td>
+        <td>{{flightdata.Travelreturn}}</td>
+        <td>{{flightdata.people}}</td>
+        <td>
+            <button mat-button color="warn" (click)="onDelete(flightdata._id)">DELETE</button>
+            <button mat-button color="accent" [routerLink]="['/editFlightdata', flightdata._id]">UPDATE</button></td>
+      </tr>
+    </table>
+  </div>
+<!--<div>
+    <ul *ngFor ="let flightdata of flightsdata let i = index">
+      <li> {{flightdata._id}}{{flightdata.From}} {{flightdata.Towhere}} {{flightdata.Trip}} {{flightdata.Depart}}
+         {{flightdata.Travelreturn}} {{flightdata.people}}(index {{i}})
+         <button mat-button color="warn" (click)="onDelete(flightdata._id)">DELETE</button>
+         <button mat-button color="accent" [routerLink]="['/editFlightdata', flightdata._id]">UPDATE</button>
+        </li>
+    </ul>
+    
+  </div>-->
