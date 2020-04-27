@@ -22,7 +22,7 @@ import { ListHotelsComponent } from './list-hotels/list-hotels.component';
 import { HotelsDataFormComponent } from './hotels-data-form/hotels-data-form.component';
 import { NewFlightsdataFormComponent } from './new-flightsdata-form/new-flightsdata-form.component';
 import { DisplaybookingComponent } from './displaybooking/displaybooking.component';
-
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 
 import { CarrentalsService } from './carrentals.service';
@@ -57,6 +57,7 @@ import { GooglemapsapiComponent } from './googlemapsapi/googlemapsapi.component'
     BrowserAnimationsModule,
     AngularMaterialModule,
     MatFormFieldModule,
+    GooglePlaceModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAmQRPhT80RT67fUSsSr4gwvkjWASX7Kvw'
     })

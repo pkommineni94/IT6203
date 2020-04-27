@@ -29,6 +29,7 @@ getFlightsdata() {
 
   onDelete(flightdataId: string) {
     this._myService.deleteFlightdata(flightdataId);
+    location.reload();
   }
 
  }

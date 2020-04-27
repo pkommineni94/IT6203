@@ -45,7 +45,7 @@ export class NewCarComponent implements OnInit {
     } else {
       this.carService.addRentalCar(this.carmodel, this.cartype, this.availabilityStart.toDateString(), this.availabilityEnd.toDateString());
     }
-    this.router.navigate(['/carslist/']);
+    this.router.navigate(['/carslist/']); 
   }
 
 }

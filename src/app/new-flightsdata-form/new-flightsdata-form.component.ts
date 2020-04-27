@@ -36,6 +36,7 @@ export class NewFlightsdataFormComponent implements OnInit {
     this._myService.addFlightsdata(this.From,this.Towhere,this.Trip,this.Depart,this.Travelreturn,this.people);
     //if(this.mode == 'edit')
     // this._myService.updateFlightsdata(this.id,this.From,this.Towhere,this.Trip,this.Depart,this.Travelreturn,this.people);
+    this.router.navigate(['/bookedFlights/']);
   }
 
   

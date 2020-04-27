@@ -326,5 +326,48 @@ app.get('/flightsdata', (req, res, next) => {
 
 });
 
+app.delete("/flightsdata/:id", (req, res, next) => {
+  console.log("abcd");
+  Flightdata.deleteOne({ _id: req.params.id }).then(result => {
+    console.log(result);
+    res.status(200).json("Deleted!");
+
+  });
+
+});
+
+ // serve incoming put requests to /students
+ app.put('/flightsdata/:id', (req, res, next) => {
+  console.log("id: " + req.params.id)
+  // check that the parameter id is valid 
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    //find a document and set new first and last names
+    Flightdata.findOneAndUpdate({_id: req.params.id},
+      {$set:{
+  From: req.body.From,
+  Towhere: req.body.Towhere,
+  Trip: req.body.Trip,
+  Depart: req.body.Depart,
+  Travelreturn: req.body.Travelreturn,
+  people: req.body.people
+      }},{new:true}) 
+     .then((flightdata) => {
+        if (flightdata) { //what was updated
+          console.log(student);
+        } else {
+          console.log("no data exist for this id");
+        }
+     })
+    .catch((err) => {
+      console.log(err);
+     });
+ } else {
+   console.log("please provide correct id");
+ }
+  
+});  
+
+
+
 //to use thids middleware in other parts of the application
 module.exports = app;

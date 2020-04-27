@@ -27,7 +27,8 @@ getHotelsdata() {
 
  onDelete(hotelId: string) {
   this._myService.deleteHotel(hotelId);
-  this.router.navigate(['/listHotels']);
+  // this.router.navigate(['/listHotels']);
+  location.reload();
 }
 
 }

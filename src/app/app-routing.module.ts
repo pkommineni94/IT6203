@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'addHotel', component: HotelsDataFormComponent },
   { path: 'edithotel/:_id', component: HotelsDataFormComponent },
   { path: 'addFlights', component: NewFlightsdataFormComponent },
+  { path: 'editFlightdata/:_id', component: NewFlightsdataFormComponent },
   { path: 'bookedFlights', component: DisplaybookingComponent }
 ];
 

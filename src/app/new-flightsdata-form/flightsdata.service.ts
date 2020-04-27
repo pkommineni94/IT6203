@@ -39,13 +39,7 @@ export class flightsdataService {
           .subscribe(() => {
               console.log('Deleted: ' + flightdataId);
           });
-
-          
-
-          
-        
-
-        location.reload();
+        // location.reload();
       }
 
 
