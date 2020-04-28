@@ -16,7 +16,7 @@ export class NewFlightsdataFormComponent implements OnInit {
   @Input() Travelreturn: Date;
   @Input() people: number;
 
-  private mode ='add' ;
+  public mode ='add' ;
   private id : string;
   constructor(private _myService: flightsdataService,private router: Router, public route:ActivatedRoute) { }
   ngOnInit(){
